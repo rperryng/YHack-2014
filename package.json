@@ -12,5 +12,10 @@
   },
   "dependencies": {
     "rfid-pn532": "^0.1.7"
+  },
+  "devDependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "mongoose": "^3.8.18"
   }
 }
