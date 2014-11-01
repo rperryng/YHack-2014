@@ -1,0 +1,16 @@
+{
+  "name": "YHack-2014",
+  "version": "1.0.0",
+  "description": "YHack 2014 Project",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rperryng/YHack-2014.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rperryng/YHack-2014/issues"
+  },
+  "dependencies": {
+    "rfid-pn532": "^0.1.7"
+  }
+}
