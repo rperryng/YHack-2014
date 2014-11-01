@@ -1,21 +1,15 @@
 {
-  "name": "YHack-2014",
+  "name": "yhack-2014-tessel",
   "version": "1.0.0",
-  "description": "YHack 2014 Project",
+  "description": "Tessel code for yhack project",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rperryng/YHack-2014.git"
   },
-  "bugs": {
-    "url": "https://github.com/rperryng/YHack-2014/issues"
-  },
   "dependencies": {
-    "body-parser": "^1.9.2",
     "camera-vc0706": "^0.1.6",
     "climate-si7005": "^0.1.3",
-    "express": "^4.10.1",
-    "mongoose": "^3.8.18",
     "needle": "^0.7.10",
     "rfid-pn532": "^0.1.7"
   }

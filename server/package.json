@@ -1,0 +1,17 @@
+{
+  "name": "yhack-2014-server",
+  "version": "0.0.1",
+  "description": "Backend for yhack project",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rperryng/YHack-2014.git"
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/rperryng/YHack-2014",
+  "dependencies": {
+    "body-parser": "^1.9.2",
+    "express": "^4.10.1",
+    "mongoose": "^3.8.18"
+  }
+}
