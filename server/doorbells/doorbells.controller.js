@@ -12,6 +12,7 @@ module.exports = controller;
 
 ////////////
 
+var currentTemp;
 var weatherRequestAvailable = false;
 var weatherRequest;
 var justHackIt = true;
@@ -29,26 +30,15 @@ function yoCallback(req, res) {
     subscribers: name
   }, function (err, doorbell) {
     if (err) {
-      if (weatherRequestAvailable) {
-        weatherRequest.sendStatus(500);
-        weatherRequestAvailable = false;
-        return;
-      }
-      weatherRequestAvailable = false;
-      res.sendStatus(400);
+      res.sendStatus(500);
       return;
     }
 
-    if (weatherRequestAvailable) {
-      weatherRequestAvailable = false;
-      weatherRequest.sendStatus(200);
-    } else {
-      console.log('no weather request to submit...');
-    }
+    submitYo(name);
+    res.sendStatus(200);
   });
 
-  submitYo(req.query.username);
-  res.sendStatus(200);
+  //  submitYo(req.query.username);
 }
 
 function notify(req, res) {
@@ -86,39 +76,9 @@ function create(req, res) {
 }
 
 function weather(req, res) {
-  console.log('storing ref of request');
-  weatherRequest = res;
-  weatherRequestAvailable = true;
 
-  console.log('request stored:', (weatherRequest !== undefined && weatherRequest !== null));
-
-  if (justHackIt) {
-    justHackIt = false;
-    return;
-  }
-
-  Doorbell.findOne({
-    tesselId: req.body.tesselId
-  }, onResult);
-
-  function onResult(err, tessel) {
-    if (err) {
-      console.log('aw man', err);
-      res.sendStatus(400);
-      return;
-    }
-
-    console.log('lol it worked', tessel);
-
-    tessel.subscribers.forEach(function (subscriber) {
-      console.log('about to alert', subscriber);
-      submitYo(subscriber);
-    });
-
-    console.log('received weather with temp:', req.body.temp);
-
-    // keep request open
-  }
+  // save the weather...
+  currentTemp = req.body.temp;
 }
 
 function submitYo(username) {
