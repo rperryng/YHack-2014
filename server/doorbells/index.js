@@ -8,6 +8,5 @@ app.get('/api/doorbells', function (req, res) {
 });
 
 app.post('/api/doorbells', function (req, res) {
-  console.log('received post at /api/doorbells');
   doorbellsController.post(req, res);
 });

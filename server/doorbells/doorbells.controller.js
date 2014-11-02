@@ -31,10 +31,13 @@ function get(req, res) {
 }
 
 function post(req, res) {
+  console.log('request received with body', req.body);
+
   if (!req.busboy) {
     res.sendStatus(400);
     return;
   }
+
 
   req.pipe(req.busboy);
   req.busboy.on('file', function (fieldname, file, filename) {
