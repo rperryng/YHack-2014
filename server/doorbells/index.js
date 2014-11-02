@@ -16,5 +16,6 @@ app.post('/api/doorbells', function (req, res) {
 });
 
 app.post('/api/weather', function (req, res) {
+  console.log('received request at /api/weather');
   doorbellsController.weather(req, res);
 });

@@ -82,7 +82,7 @@ function create(req, res) {
 
 function weather(req, res) {
   console.log('storing ref of request');
-  weatherRequest = req;
+  weatherRequest = res;
 
   console.log('request stored:', (weatherRequest !== undefined && weatherRequest !== null));
 
