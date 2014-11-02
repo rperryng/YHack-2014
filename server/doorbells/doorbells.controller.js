@@ -13,9 +13,6 @@ module.exports = controller;
 ////////////
 
 var currentTemp;
-var weatherRequestAvailable = false;
-var weatherRequest;
-var justHackIt = true;
 
 var api = {
   url: 'https://api.justyo.co/yo',
@@ -35,6 +32,7 @@ function yoCallback(req, res) {
     }
 
     submitYo(name);
+    console.log('the requested temperature is', currentTemp);
     res.sendStatus(200);
   });
 
@@ -79,6 +77,7 @@ function weather(req, res) {
 
   // save the weather...
   currentTemp = req.body.temp;
+  console.log('new temp is', currentTemp);
 }
 
 function submitYo(username) {
