@@ -28,11 +28,18 @@ function yoCallback(req, res) {
     subscribers: name
   }, function (err, doorbell) {
     if (err) {
-      weatherRequest.sendStatus(500);
+      if (weatherRequest) {
+        weatherRequest.sendStatus(500);
+      }
+      res.sendStatus(200);
       return;
     }
 
-    weatherRequest.sendStatus(200);
+    if (weatherRequest) {
+      weatherRequest.sendStatus(200);
+    } else {
+      console.log('no weather request to submit...');
+    }
   });
 
   submitYo(req.query.username);
@@ -74,7 +81,10 @@ function create(req, res) {
 }
 
 function weather(req, res) {
+  console.log('storing ref of request');
   weatherRequest = req;
+
+  console.log('request stored:', (weatherRequest !== undefined && weatherRequest !== null));
 
   if (justHackIt) {
     justHackIt = false;
