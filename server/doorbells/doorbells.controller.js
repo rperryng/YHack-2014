@@ -31,7 +31,7 @@ function yoCallback(req, res) {
       return;
     }
 
-    submitYo(name);
+    submitYoLink(name);
     console.log('the requested temperature is', currentTemp);
     res.sendStatus(200);
   });
