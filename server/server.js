@@ -31,7 +31,7 @@ app.get('/', function (req, res) {
 
 // WEATHER ROUTE
 app.get('/temperature/:temp', function (req, res) {
-  var innerHTML = '<div>The temperature outside is ' + req.params.temp + ' degrees celsius</div>';
+  var innerHTML = '<div style="font-size: 2em;">The temperature outside is ' + req.params.temp + ' degrees celsius</div>';
   res.send(innerHTML);
 });
 
