@@ -17,19 +17,8 @@ var api = {
 
 function get(req, res) {
   console.log('got GET request with params', req.query);
+  submitYo(req.params.username);
   res.sendStatus(200);
-
-  request
-    .post(api.url, {
-        form: {
-          username: req.query.username,
-          api_token: api.token
-        }
-      },
-      function (err, response) {
-        console.log('sent yo to rperryng and received', response.statusCode);
-      }
-  );
 }
 
 function post(req, res) {
@@ -45,21 +34,24 @@ function post(req, res) {
     }
 
     tessel.subscribers.forEach(function (subscriber) {
-      request
-        .post(api.url, {
-          form: {
-            username: subscriber,
-            api_token: api.token
-          }
-        }, function (err) {
-          if (err) {
-            console.log('got an error:', err);
-          }
-        });
+      submitYo(subscriber);
     });
 
     console.log(tessel.subscribers);
     res.sendStatus(200);
   }
+}
 
+function submitYo(username) {
+  request
+    .post(api.url, {
+        form: {
+          username: username,
+          api_token: api.token
+        }
+      },
+      function (err, response) {
+        console.log('sent yo to', username, 'and received', response.statusCode);
+      }
+  );
 }
