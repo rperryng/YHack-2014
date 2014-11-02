@@ -49,7 +49,7 @@ function post(req, res) {
         .post(api.url, {
           form: {
             username: subscriber,
-            apitoken: api.token
+            api_token: api.token
           }
         }, function (err) {
           if (err) {
