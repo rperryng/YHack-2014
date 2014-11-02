@@ -1,10 +1,14 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
-  doorbells = require('./doorbells');
+  doorbells = require('./doorbells'),
+  socket = require('./socket');
 
 var app = express();
 var port = process.env.PORT || 80;
+
+// open socket
+socket.connectToSocket();
 
 // mongodb
 mongoose.connect('mongodb://104.236.63.85:27017/yhack');
