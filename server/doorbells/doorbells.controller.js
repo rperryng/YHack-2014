@@ -1,5 +1,4 @@
-var apiToken = require('../yo.key.js'),
-  request = require('request'),
+var request = require('request'),
   Doorbell = require('./doorbells.model');
 
 var controller = {
@@ -11,15 +10,20 @@ module.exports = controller;
 
 ////////////
 
+var api = {
+  url: 'https://api.justyo.co/yo',
+  token: require('../yo.key')
+};
+
 function get(req, res) {
   console.log('got GET request with params', req.query);
   res.sendStatus(200);
 
   request
-    .post('https://api.justyo.co/yo', {
+    .post(api.url, {
         form: {
           username: req.query.username,
-          api_token: apiToken
+          api_token: api.token
         }
       },
       function (err, response) {
@@ -39,6 +43,20 @@ function post(req, res) {
       res.sendStatus(400);
       return;
     }
+
+    tessel.subscribers.forEach(function (subscriber) {
+      request
+        .post(api.url, {
+          form: {
+            username: subscriber,
+            apitoken: api.token
+          }
+        }, function (err) {
+          if (err) {
+            console.log('got an error:', err);
+          }
+        });
+    });
 
     console.log(tessel.subscribers);
     res.sendStatus(200);
