@@ -6,10 +6,9 @@ var express = require('express'),
 
 var app = express();
 var port = process.env.PORT || 80;
-var portSocket = 8000;
 
 // open socket
-socket.createServer(portSocket);
+socket.createServer();
 
 // mongodb
 mongoose.connect('mongodb://104.236.63.85:27017/yhack');

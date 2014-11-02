@@ -1,53 +1,24 @@
-//var ws = require('nodejs-websocket');
-//
-//var service = {
-//  createServer: createServer
-//};
-//
-//module.exports = service;
-//
-/////////////////
-//
-//function createServer(port) {
-//  ws.createServer(function (conn) {
-//    console.log('new connection!');
-//
-//    // text from the client..
-//    conn.on('text', function (str) {
-//      console.log('Received:', str);
-//
-//      conn.sendText(str.toUpperCase() + '!!!');
-//    });
-//
-//    conn.on('close', function (code, reason) {
-//      console.log('Connection closed due to', reason);
-//    });
-//  }).listen(port);
-//}
-
-var wslib = require('ws');
+var ws = require("nodejs-websocket");
 
 var service = {
-  createServer: createServer
+  connectToSocket: connectToSocket
 };
 
 module.exports = service;
 
-//////////////
+////////////
+var port = 8000;
 
-function createServer(socketPort) {
-  var WebSocketServer = wslib.Server,
-    wss = new WebSocketServer({
-      port: socketPort
-    });
+function connectToSocket() {
+  // INSERT TESSEL IP ADDRESS HERE. Always prepend with 'ws://' to indicate websocket
+  var connection = ws.connect('ws://172.26.1.213:' + port, function () {
+    // When we connect to the server, send some catchy text
+    connection.sendText("My milkshake brings all the boys to the yard");
+  });
 
-  wss.on('connection', function (ws) {
-    console.log('connected!');
-
-    ws.on('message', function (message) {
-      console.log('received', message);
-      ws.send('THIS IS FROM A SOCKET');
-    });
-
+  // When we get text back
+  connection.on('text', function (text) {
+    // print it out
+    console.log("Echoed back from tessel:", text);
   });
 }
