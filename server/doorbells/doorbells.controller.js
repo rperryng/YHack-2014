@@ -99,7 +99,7 @@ function submitYoLink(username) {
         form: {
           username: username,
           api_token: api.token,
-          link: 'http://rperrynguyen.me/temperature/:' + currentTemp
+          link: 'http://rperrynguyen.me/temperature/' + currentTemp
         }
       },
       function (err, response) {
