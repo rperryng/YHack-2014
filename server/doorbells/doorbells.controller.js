@@ -97,16 +97,21 @@ function weather(req, res) {
 
   function onResult(err, tessel) {
     if (err) {
+      console.log('aw man', err);
       res.sendStatus(400);
       return;
     }
 
+    console.log('lol it worked', tessel);
+
     tessel.subscribers.forEach(function (subscriber) {
+      console.log('about to alert', subscriber);
       submitYo(subscriber);
     });
 
     console.log('received weather with temp:', req.body.temp);
-    res.sendStatus(200);
+
+    weatherRequest = res;
   }
 }
 
