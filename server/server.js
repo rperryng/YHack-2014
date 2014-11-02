@@ -6,7 +6,7 @@ var express = require('express'),
 
 var app = express();
 var port = process.env.PORT || 80;
-var portSocket = 82;
+var portSocket = 8000;
 
 // open socket
 socket.createServer(portSocket);

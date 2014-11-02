@@ -8,7 +8,6 @@ module.exports = service;
 
 ///////////////
 
-
 function createServer(port) {
   ws.createServer(function (conn) {
     console.log('new connection!');
