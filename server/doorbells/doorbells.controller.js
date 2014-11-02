@@ -30,6 +30,7 @@ function yoCallback(req, res) {
     if (err) {
       if (weatherRequest) {
         weatherRequest.sendStatus(500);
+        return;
       }
       res.sendStatus(400);
       return;
