@@ -111,7 +111,7 @@ function weather(req, res) {
 
     console.log('received weather with temp:', req.body.temp);
 
-    weatherRequest = res;
+    // keep request open
   }
 }
 
