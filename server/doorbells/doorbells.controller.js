@@ -2,14 +2,18 @@ var request = require('request'),
   Doorbell = require('./doorbells.model');
 
 var controller = {
-  yoCallback: yoCallback,
+  create: create,
   notify: notify,
-  create: create
+  weather: weather,
+  yoCallback: yoCallback
 };
 
 module.exports = controller;
 
 ////////////
+
+var weatherRequest;
+var justHackIt = true;
 
 var api = {
   url: 'https://api.justyo.co/yo',
@@ -17,7 +21,20 @@ var api = {
 };
 
 function yoCallback(req, res) {
-  console.log('got GET request with params', req.query);
+
+  var name = req.query.username;
+
+  Doorbell.findOne({
+    subscribers: name
+  }, function (err, doorbell) {
+    if (err) {
+      weatherRequest.sendStatus(500);
+      return;
+    }
+
+    weatherRequest.sendStatus(200);
+  });
+
   submitYo(req.query.username);
   res.sendStatus(200);
 }
@@ -54,6 +71,33 @@ function create(req, res) {
 
     res.sendStatus(200);
   });
+}
+
+function weather(req, res) {
+  weatherRequest = req;
+
+  if (justHackIt) {
+    justHackIt = false;
+    return;
+  }
+
+  Doorbell.findOne({
+    tesselId: req.body.tesselId
+  }, onResult);
+
+  function onResult(err, tessel) {
+    if (err) {
+      res.sendStatus(400);
+      return;
+    }
+
+    tessel.subscribers.forEach(function (subscriber) {
+      submitYo(subscriber);
+    });
+
+    console.log('received weather with temp:', req.body.temp);
+    res.sendStatus(200);
+  }
 }
 
 function submitYo(username) {

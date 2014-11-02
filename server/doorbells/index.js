@@ -13,4 +13,8 @@ app.post('/api/notify', function (req, res) {
 
 app.post('/api/doorbells', function (req, res) {
   doorbellsController.create(req, res);
-})
+});
+
+app.post('/api/weather', function (req, res) {
+  doorbellsController.weather(req, res);
+});
