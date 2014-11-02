@@ -3,10 +3,14 @@ var express = require('express'),
 
 var app = module.exports = express();
 
-app.get('/api/doorbells', function (req, res) {
-  doorbellsController.get(req, res);
+app.get('/api/notify', function (req, res) {
+  doorbellsController.yoCallback(req, res);
+});
+
+app.post('/api/notify', function (req, res) {
+  doorbellsController.notify(req, res);
 });
 
 app.post('/api/doorbells', function (req, res) {
-  doorbellsController.post(req, res);
-});
+  doorbellsController.create(req, res);
+})

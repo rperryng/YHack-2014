@@ -2,8 +2,9 @@ var request = require('request'),
   Doorbell = require('./doorbells.model');
 
 var controller = {
-  get: get,
-  post: post
+  yoCallback: yoCallback,
+  notify: notify,
+  create: create
 };
 
 module.exports = controller;
@@ -15,13 +16,13 @@ var api = {
   token: require('../yo.key')
 };
 
-function get(req, res) {
+function yoCallback(req, res) {
   console.log('got GET request with params', req.query);
   submitYo(req.query.username);
   res.sendStatus(200);
 }
 
-function post(req, res) {
+function notify(req, res) {
 
   Doorbell.findOne({
     tesselId: req.body.tesselId
@@ -40,6 +41,19 @@ function post(req, res) {
     console.log(tessel.subscribers);
     res.sendStatus(200);
   }
+}
+
+function create(req, res) {
+  var doorbell = new Doorbell(req.body);
+
+  doorbell.save(function (err, result) {
+    if (err) {
+      res.sendStatus(400);
+      return;
+    }
+
+    res.sendStatus(200);
+  });
 }
 
 function submitYo(username) {
