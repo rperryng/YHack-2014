@@ -17,7 +17,7 @@ var api = {
 
 function get(req, res) {
   console.log('got GET request with params', req.query);
-  submitYo(req.params.username);
+  submitYo(req.query.username);
   res.sendStatus(200);
 }
 
