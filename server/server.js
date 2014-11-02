@@ -2,6 +2,7 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   busboy = require('connect-busboy'),
   mongoose = require('mongoose'),
+  multer = require('multer'),
   doorbells = require('./doorbells'),
   socket = require('./socket');
 
@@ -18,7 +19,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(busboy());
+app.use(multer({
+  dest: './img'
+}));
+// app.use(busboy());
 
 // routes
 app.get('/', function (req, res) {
