@@ -29,3 +29,6 @@ node_modules
 
 # hide the appid
 yo.key.js
+
+# don't upload uploaded images
+server/img
