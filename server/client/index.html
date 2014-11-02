@@ -1,0 +1,27 @@
+<html>
+
+<head>
+  <title>Yo Doorbell - Doorstep in your hands.</title>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat:700,400">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/client/theme.css">
+</head>
+
+<body>
+  <h1>Yo Doorbell</h1>
+  <h2>Doorstep in your hands.<h2>
+  <p> Yo! Someone's at your door. </p>
+  <p> Yo! What's it like outside right now? </p><br>
+
+  <div class="getUserInfo">
+    <div class="form-vertical">
+      <form name="yo" action="/api/doorbells" method="POST">
+        <input class="form-field" type="text" name="username" required placeholder="Yo Username">
+        <input class="form-field" type="text" name="tesselId" required placeholder="Tessel ID">
+        <input class="btn btn-default btn-lg" type="submit" value="SUBMIT">
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

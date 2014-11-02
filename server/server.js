@@ -2,7 +2,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
   doorbells = require('./doorbells'),
-  socket = require('./socket');
+  socket = require('./socket'),
+  timeout = require('connect-timeout');
 
 var app = express();
 var port = process.env.PORT || 80;
@@ -19,9 +20,13 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(timeout(99999999));
+
+app.use('/client', express.static(__dirname + '/client'));
+
 // routes
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/client/index.html');
 });
 
 app.use(doorbells);
