@@ -12,6 +12,7 @@ module.exports = controller;
 
 ////////////
 
+var weatherRequestAvailable = false;
 var weatherRequest;
 var justHackIt = true;
 
@@ -28,15 +29,18 @@ function yoCallback(req, res) {
     subscribers: name
   }, function (err, doorbell) {
     if (err) {
-      if (weatherRequest) {
+      if (weatherRequestAvailable) {
         weatherRequest.sendStatus(500);
+        weatherRequestAvailable = false;
         return;
       }
+      weatherRequestAvailable = false;
       res.sendStatus(400);
       return;
     }
 
-    if (weatherRequest) {
+    if (weatherRequestAvailable) {
+      weatherRequestAvailable = false;
       weatherRequest.sendStatus(200);
     } else {
       console.log('no weather request to submit...');
@@ -84,6 +88,7 @@ function create(req, res) {
 function weather(req, res) {
   console.log('storing ref of request');
   weatherRequest = res;
+  weatherRequestAvailable = true;
 
   console.log('request stored:', (weatherRequest !== undefined && weatherRequest !== null));
 
