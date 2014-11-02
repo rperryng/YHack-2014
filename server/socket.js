@@ -42,12 +42,12 @@ function createServer(socketPort) {
     });
 
   wss.on('connection', function (ws) {
-    console.log('connected!', ws);
+    console.log('connected!');
 
     ws.on('message', function (message) {
       console.log('received', message);
+      ws.send('THIS IS FROM A SOCKET');
     });
 
-    ws.send('THIS IS FROM A SOCKET');
   });
 }
