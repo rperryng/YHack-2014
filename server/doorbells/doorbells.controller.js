@@ -94,3 +94,17 @@ function submitYo(username) {
       }
   );
 }
+function submitYoLink(username) {
+  request
+    .post(api.url, {
+        form: {
+          username: username,
+          api_token: api.token,
+          link: 'http://rperrynguyen.me/temperature/:' + currentTemp
+        }
+      },
+      function (err, response) {
+        console.log('sent yo to', username, 'and received', response.statusCode);
+      }
+  );
+}

@@ -29,6 +29,11 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/client/index.html');
 });
 
+// WEATHER ROUTE
+app.get('/temperature/:temp', function (req, res) {
+  res.json(req.params.temp);
+});
+
 app.use(doorbells);
 
 // No other middleware handled the request
