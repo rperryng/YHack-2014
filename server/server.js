@@ -1,8 +1,6 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
-  busboy = require('connect-busboy'),
   mongoose = require('mongoose'),
-  multer = require('multer'),
   doorbells = require('./doorbells'),
   socket = require('./socket');
 
@@ -13,16 +11,14 @@ var portSocket = 82;
 // open socket
 socket.createServer(portSocket);
 
+// mongodb
+mongoose.connect('mongodb://104.236.63.85:27017/yhack');
+
 // middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
-app.use(multer({
-  dest: './img'
-}));
-// app.use(busboy());
 
 // routes
 app.get('/', function (req, res) {

@@ -1,5 +1,6 @@
 var apiToken = require('../yo.key.js'),
-  request = require('request');
+  request = require('request'),
+  Doorbell = require('./doorbells.model');
 
 var controller = {
   get: get,
@@ -28,6 +29,19 @@ function get(req, res) {
 }
 
 function post(req, res) {
-  console.dir(req.files);
-  res.sendStatus(200);
+
+  Doorbell.findOne({
+    tesselId: req.body.tesselId
+  }, onResult);
+
+  function onResult(err, tessel) {
+    if (err) {
+      res.sendStatus(400);
+      return;
+    }
+
+    console.log(tessel.subscribers);
+    res.sendStatus(200);
+  }
+
 }
